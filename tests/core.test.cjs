@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict'),F=require('../src/core.js');let checks=0;function test(name,fn){fn();checks++;console.log('✓',name);}
+const p={code:'000001',kind:'货币型-普通货币',yield7:1.5,income:.4,dataDate:'2026-10-23'},c={minimum:10,checkedAt:'2026-10-26',purchaseLimit:'100.00万元',purchaseStatus:'限大额'},o={amount:10000,need:'research',today:'2026-10-26',date:'2026-10-23'};
+test('普通与浮动口径隔离',()=>assert.equal(F.ranked([p,{...p,code:'000002',kind:'货币型-浮动净值',yield7:100}],o.date).length,1));
+test('缺失不当0',()=>assert.equal(F.ranked([{...p,yield7:null}],o.date).length,0));
+test('不同日不可比较',()=>assert.equal(F.ranked([{...p,dataDate:'2026-10-22'}],o.date).length,0));
+test('零与负值是有效收益',()=>assert.equal(F.ranked([{...p,yield7:0},{...p,code:'000003',yield7:-1}],o.date).length,2));
+test('条件候选通过',()=>assert.deepEqual(F.reasons(p,c,o),[]));
+test('未知渠道排除',()=>assert(F.reasons(p,null,o).length));
+test('未达门槛排除',()=>assert(F.reasons(p,{...c,minimum:5000000},o).some(x=>x.includes('门槛'))));
+test('起购日限额冲突排除',()=>assert(F.reasons(p,{...c,minimum:5000000},o).some(x=>x.includes('冲突'))));
+test('超过限额排除',()=>assert(F.reasons(p,c,{...o,amount:2000000}).some(x=>x.includes('超过'))));
+test('未知限额排除',()=>assert(F.reasons(p,{...c,purchaseLimit:'待核验'},o).some(x=>x.includes('上限未知'))));
+test('陈旧收益排除',()=>assert(F.reasons(p,c,{...o,today:'2026-10-27'}).some(x=>x.includes('超过3天'))));
+test('陈旧渠道排除',()=>assert(F.reasons(p,{...c,checkedAt:'2026-10-01'},o).some(x=>x.includes('超过7天'))));
+for(const need of ['bank','wallet','ordinary','pay'])test('未知取用能力不可推荐 '+need,()=>assert(F.reasons(p,c,{...o,need}).length));
+test('情景等待与费用',()=>{const r=F.scenario(10000,30,1.5,1,1,2,15);assert(Math.abs(r.delta-(10000*.015*29/365-2-10000*.01*30/365))<1e-9)});
+test('等待超过周期不生利息',()=>assert.equal(F.scenario(10000,7,2,1,10,0).earned,0));
+test('负收益差保留',()=>assert(F.scenario(10000,30,.5,1).delta<0));
+test('无效数字拒绝',()=>assert.equal(F.scenario(NaN,30,2,1),null));
+test('历史缺一天拒算',()=>assert(F.replay([{date:'2026-10-01',income:1}],[{date:'2026-10-01',income:1}],'2026-10-01','2026-10-02',10000).error));
+test('历史空数据拒算',()=>assert(F.replay([],[],'2026-10-01','2026-10-01',10000).error));
+test('历史0收益与固定份额求和',()=>{const r=F.replay([{date:'2026-10-01',income:0},{date:'2026-10-02',income:.3}],[{date:'2026-10-01',income:.1},{date:'2026-10-02',income:.1}],'2026-10-01','2026-10-02',20000);assert(Math.abs(r.delta-.2)<1e-9);assert.equal(r.days,2)});
+test('拒绝倒序历史',()=>assert(F.replay([],[],'2026-10-02','2026-10-01',10000).error));
+console.log(checks+' core checks passed');

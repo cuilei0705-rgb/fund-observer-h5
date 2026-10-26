@@ -1,0 +1,25 @@
+{
+  "total": 977,
+  "universeCount": 977,
+  "quoteRows": 545,
+  "yieldCount": 544,
+  "incomeCount": 544,
+  "missingYieldCount": 433,
+  "floatingCount": 8,
+  "quoteDate": "2026-10-23",
+  "fetchedAt": "2026-10-26T13:32:26+08:00",
+  "newCodes": [],
+  "notSeenCount": 0,
+  "scope": "公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录",
+  "completeness": "未与监管名录逐项核对，基金公司及销售渠道覆盖不完整。各份额不等于独立基金；缺失及存续未知均保留。",
+  "sources": [
+    {
+      "url": "https://fund.eastmoney.com/js/fundcode_search.js",
+      "sha256": "d56d1d0e2a5a922a3195b1ba63678e49917546482037ff349f2b3b10b7dda934"
+    },
+    {
+      "url": "https://fund.eastmoney.com/HBJJ_pjsyl.html",
+      "sha256": "20a0ea39f08aa42cb3a60481e09a5549c008c1bfea94e8288463b20ee0ae3934"
+    }
+  ]
+}
