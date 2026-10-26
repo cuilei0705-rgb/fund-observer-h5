@@ -2,7 +2,7 @@ from pathlib import Path
 import json, shutil
 ROOT=Path(__file__).resolve().parents[1]
 def build():
-    data={name:json.loads((ROOT/'data'/f'{name}.json').read_text()) if (ROOT/'data'/f'{name}.json').exists() else {} for name in ('products','coverage','channels','yuebao','history','status')}
+    data={name:json.loads((ROOT/'data'/f'{name}.json').read_text()) if (ROOT/'data'/f'{name}.json').exists() else {} for name in ('products','coverage','channels','yuebao','history','status','official')}
     # Pack shared fields to keep mobile transfer small.
     for key in ['products']:
         rows=data[key]; common={k:v for k,v in rows[0].items() if all(r.get(k)==v for r in rows)}

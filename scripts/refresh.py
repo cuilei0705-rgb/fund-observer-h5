@@ -74,19 +74,50 @@ def main():
         print('Channel checked',code,flush=True)
     save('channels',channels)
     targets=sorted(set(codes)|{p['code'] for p in yuebao.get('products',[])})
-    urls={code:f'https://api.fund.eastmoney.com/f10/lsjz?fundCode={code}&pageIndex=1&pageSize=40&endDate={coverage.get("quoteDate","")}' for code in targets}
-    history_downloads={code:pool.submit(fetch,urls[code]) for code in targets}
+    deadline=time.monotonic()+480
+    requests={}
     for code in targets:
-        url=urls[code]
-        try:
-            raw=history_downloads[code].result(); rows=history_parse(raw); excluded=sum(str(r.get('NAVTYPE'))!='1' for r in json.loads(raw)['Data']['LSJZList'])
-            history[code]={'rows':rows,'excludedMergedOrOtherRows':excluded,'fetchedAt':now(),'sourceUrl':url,'sha256':hashlib.sha256(raw).hexdigest()}
-            if excluded: status['qualityExclusions'].append('逐日 '+code+'：已排除 '+str(excluded)+' 条合并区间或不同口径记录；相关缺日拒算')
-        except Exception as e:
-            status['failures'].append('逐日 '+code+'：'+str(e))
-            if code in history: status['retained'].append({'area':'历史','code':code,'fetchedAt':history[code].get('fetchedAt')})
-        print('History checked',code,flush=True)
-    pool.shutdown()
+        for page in ([1] if history.get(code,{}).get('backfillCompleted') else range(1,6)):
+            url=f'https://api.fund.eastmoney.com/f10/lsjz?fundCode={code}&pageIndex={page}&pageSize=20&endDate={coverage.get("quoteDate","")}'
+            requests[(code,page)]=(url,pool.submit(fetch,url))
+    for code in targets:
+        previous_history=history.get(code,{})
+        merged={r['date']:r for r in previous_history.get('rows',[])}
+        sources={r['page']:r for r in previous_history.get('pageSources',[]) if 'page' in r}
+        pages=[page for c,page in requests if c==code];excluded=0;successful=0;complete=True;ended=False;latest_hash=previous_history.get('sha256')
+        for page in pages:
+            url,future=requests[(code,page)]
+            try:
+                if time.monotonic()>=deadline:future.cancel();raise TimeoutError('本轮历史抓取预算用尽，保留旧记录')
+                raw=future.result(timeout=max(1,deadline-time.monotonic()));response=json.loads(raw);data=response.get('Data') or {};raw_rows=data.get('LSJZList')
+                if str(response.get('ErrCode',0))!='0':raise ValueError('历史接口返回错误状态，保留已有记录')
+                if raw_rows==[] and page>1:
+                    ended=True
+                    for later in pages:
+                        if later>page:requests[(code,later)][1].cancel()
+                    break
+                rows=history_parse(raw);stamp=now();digest=hashlib.sha256(raw).hexdigest();successful+=1
+                if page==1:latest_hash=digest
+                for row in raw_rows:
+                    if str(row.get('NAVTYPE'))!='1':
+                        excluded+=1
+                        try:
+                            start=dt.date.fromisoformat(row.get('SDATE') or row['FSRQ']);end=dt.date.fromisoformat(row['FSRQ'])
+                            for day in list(merged):
+                                if start.isoformat()<=day<=end.isoformat():merged.pop(day,None)
+                        except (ValueError,TypeError,KeyError):pass
+                for row in rows:merged[row['date']]={**row,'sourceUrl':url,'fetchedAt':stamp,'sha256':digest}
+                sources[page]={'page':page,'url':url,'fetchedAt':stamp,'sha256':digest}
+            except Exception as e:
+                complete=False;status['failures'].append('逐日 '+code+' 第'+str(page)+'页：'+str(e))
+        if successful:
+            cutoff=(dt.date.fromisoformat(coverage['quoteDate'])-dt.timedelta(days=399)).isoformat()
+            history[code]={'rows':[merged[d] for d in sorted(merged) if cutoff<=d<=coverage['quoteDate']],'excludedMergedOrOtherRows':excluded,'fetchedAt':now(),'sourceUrl':requests[(code,1)][0],'sha256':latest_hash,'pageSources':list(sources.values()),'backfillCompleted':bool(previous_history.get('backfillCompleted') or complete and (ended or len(pages)==5))}
+        elif code in history:
+            status['retained'].append({'area':'历史','code':code,'fetchedAt':previous_history.get('fetchedAt')})
+        if excluded:status['qualityExclusions'].append('逐日 '+code+'：本轮已排除 '+str(excluded)+' 条合并区间或不同口径记录；相关缺日拒算')
+        print('History checked',code,'records',len(history.get(code,{}).get('rows',[])),flush=True)
+    pool.shutdown(wait=False,cancel_futures=True)
     save('history',history)
     for code in targets:
         available={r['date'] for r in history.get(code,{}).get('rows',[]) if r.get('income') is not None}
