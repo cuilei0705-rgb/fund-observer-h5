@@ -49,13 +49,14 @@ def history_parse(raw):
     return sorted(result.values(),key=lambda x:x['date'])
 def main():
     print('Starting public snapshot refresh',now(),flush=True)
-    status={'attemptedAt':now(),'market':'failed','failures':[]}; previous=read('products',[])
+    status={'attemptedAt':now(),'market':'failed','failures':[],'qualityExclusions':[],'retained':[],'missingRecords':[]}; previous=read('products',[])
     products=previous; coverage=read('coverage',{})
     try:
         products,coverage=market(fetch('https://fund.eastmoney.com/js/fundcode_search.js'),fetch('https://fund.eastmoney.com/HBJJ_pjsyl.html'),previous)
         if coverage['quoteDate']<read('coverage',{}).get('quoteDate',''): raise ValueError('来源日期倒退')
         save('products',products); save('coverage',coverage); status['market']='success'
-    except Exception as e: status['failures'].append('市场快照：'+str(e))
+    except Exception as e:
+        status['failures'].append('市场快照：'+str(e));status['retained'].append({'area':'行情','fetchedAt':coverage.get('fetchedAt'),'reason':'获取或结构验证失败，沿用上次市场快照'})
     channels=read('channels',{}); history=read('history',{}); yuebao=read('yuebao',{})
     ordinary=[p for p in products if '普通货币' in p['kind'] and p.get('yield7') is not None and p.get('dataDate')==coverage.get('quoteDate')]
     leaders=sorted(ordinary,key=lambda p:-p['yield7'])[:12]
@@ -67,7 +68,9 @@ def main():
             raw=channel_downloads[code].result()
             with tempfile.TemporaryDirectory() as folder:
                 path=Path(folder)/(code+'.html'); path.write_bytes(raw); channels[code]=parse_channel(path)
-        except Exception as e: status['failures'].append('渠道 '+code+'：'+str(e))
+        except Exception as e:
+            status['failures'].append('渠道 '+code+'：'+str(e))
+            if code in channels: status['retained'].append({'area':'渠道','code':code,'fetchedAt':channels[code].get('checkedAt')})
         print('Channel checked',code,flush=True)
     save('channels',channels)
     targets=sorted(set(codes)|{p['code'] for p in yuebao.get('products',[])})
@@ -78,11 +81,18 @@ def main():
         try:
             raw=history_downloads[code].result(); rows=history_parse(raw); excluded=sum(str(r.get('NAVTYPE'))!='1' for r in json.loads(raw)['Data']['LSJZList'])
             history[code]={'rows':rows,'excludedMergedOrOtherRows':excluded,'fetchedAt':now(),'sourceUrl':url,'sha256':hashlib.sha256(raw).hexdigest()}
-            if excluded: status['failures'].append('逐日 '+code+'：已排除 '+str(excluded)+' 条合并区间或不同口径记录；相关缺日拒算')
-        except Exception as e: status['failures'].append('逐日 '+code+'：'+str(e))
+            if excluded: status['qualityExclusions'].append('逐日 '+code+'：已排除 '+str(excluded)+' 条合并区间或不同口径记录；相关缺日拒算')
+        except Exception as e:
+            status['failures'].append('逐日 '+code+'：'+str(e))
+            if code in history: status['retained'].append({'area':'历史','code':code,'fetchedAt':history[code].get('fetchedAt')})
         print('History checked',code,flush=True)
     pool.shutdown()
     save('history',history)
+    for code in targets:
+        available={r['date'] for r in history.get(code,{}).get('rows',[]) if r.get('income') is not None}
+        end=dt.date.fromisoformat(coverage['quoteDate'])
+        missing=[(end-dt.timedelta(days=i)).isoformat() for i in range(6,-1,-1) if (end-dt.timedelta(days=i)).isoformat() not in available]
+        if missing: status['missingRecords'].append({'area':'历史近7日','code':code,'dates':missing,'impact':'相关区间回放拒算；不影响同日已核验行情'})
     bycode={p['code']:p for p in products}
     for p in yuebao.get('products',[]):
         if p['code'] in bycode and bycode[p['code']].get('dataDate')==coverage.get('quoteDate') and bycode[p['code']].get('yield7') is not None:
