@@ -22,3 +22,11 @@ test('历史空数据拒算',()=>assert(F.replay([],[],'2026-10-01','2026-10-01'
 test('历史0收益与固定份额求和',()=>{const r=F.replay([{date:'2026-10-01',income:0},{date:'2026-10-02',income:.3}],[{date:'2026-10-01',income:.1},{date:'2026-10-02',income:.1}],'2026-10-01','2026-10-02',20000);assert(Math.abs(r.delta-.2)<1e-9);assert.equal(r.days,2)});
 test('拒绝倒序历史',()=>assert(F.replay([],[],'2026-10-02','2026-10-01',10000).error));
 console.log(checks+' core checks passed');
+// Regression coverage for review findings: one quote identity, explicit fallback, and viable defaults.
+test('同日历史回退统一收益及来源',()=>{const p=F.resolveQuote({code:'000198',kind:'货币型-普通货币',yield7:null,income:null,dataDate:null},'2026-10-23',{rows:[{date:'2026-10-23',income:.23,yield7:.846}],fetchedAt:'2026-10-26',sourceUrl:'https://example.test/history'});assert.equal(p.yield7,.846);assert.equal(p.dataDate,'2026-10-23');assert.equal(p.quoteOrigin,'history');assert.equal(p.sourceUrl,'https://example.test/history')});
+test('不同日历史不充作当前行情',()=>{const p=F.resolveQuote({kind:'货币型-普通货币',yield7:null},'2026-10-23',{rows:[{date:'2026-10-22',income:.2,yield7:.8}]});assert.equal(p.yield7,null);assert.equal(p.quoteOrigin,'missing')});
+test('行情完整时不偷偷换历史源',()=>{const q=F.resolveQuote(p,'2026-10-23',{rows:[{date:'2026-10-23',income:2,yield7:5}]});assert.equal(q.yield7,1.5);assert.equal(q.quoteOrigin,'market')});
+test('默认历史区间避开缺口且可计算',()=>{const a=[{date:'2026-10-20',income:.2},{date:'2026-10-22',income:.3},{date:'2026-10-23',income:.4}],b=[...a];const w=F.commonWindow(a,b,'2026-10-23');assert.equal(w.start,'2026-10-22');assert.equal(w.end,'2026-10-23');assert.equal(w.days,2);assert(!F.replay(a,b,w.start,w.end,10000).error);assert(w.missing.some(r=>r.date==='2026-10-21'))});
+test('无共同日期直接预检不可回放',()=>{const w=F.commonWindow([{date:'2026-10-23',income:.2}],[{date:'2026-10-22',income:.2}],'2026-10-23');assert.equal(w.days,0);assert.equal(w.start,undefined)});
+test('质量拦截不被当作获取失败',()=>{const s=F.healthState({failures:['逐日 000198：已排除 4 条合并区间或不同口径记录；相关缺日拒算','网络超时']});assert.equal(s.failures.length,1);assert.equal(s.qualityExclusions.length,1)});
+console.log(checks+' total core checks passed');
