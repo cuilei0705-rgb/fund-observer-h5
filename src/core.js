@@ -22,7 +22,7 @@
   if(need==='wallet')r.push('活期宝极速回款额度、服务时间及资格未验证');
   return r;
  }
- function scenario(amount,days,rate,base,gap=0,fee=0,target=15){
+ function scenario(amount,days,rate,base,gap=0,fee=0,target=5){
   if(![amount,days,rate,base,gap,fee,target].every(finite)||amount<=0||days<1||days>3660||gap<0||fee<0||target<=0)return null;
   const earned=amount*rate/100*Math.max(0,days-gap)/365-fee;
   const baseline=amount*base/100*days/365;
@@ -31,7 +31,7 @@
  function replay(h1,h2,start,end,amount){
   if(!start||!end||start>end||!finite(amount)||amount<=0)return {error:'请选择有效金额与起止日期'};
   const a=new Map((h1||[]).map(r=>[r.date,r.income])),b=new Map((h2||[]).map(r=>[r.date,r.income]));
-  let first=Date.parse(start+'T00:00:00Z'),last=Date.parse(end+'T00:00:00Z');if(!Number.isFinite(first)||!Number.isFinite(last)||last-first>366*86400000)return {error:'历史回放最多366天'};
+  let first=Date.parse(start+'T00:00:00Z'),last=Date.parse(end+'T00:00:00Z');if(!Number.isFinite(first)||!Number.isFinite(last)||last-first>=366*86400000)return {error:'历史回放最多366天'};
   let x=0,y=0,missing=[];for(let day=first;day<=last;day+=86400000){const d=new Date(day).toISOString().slice(0,10);if(!finite(a.get(d))||!finite(b.get(d)))missing.push(d);else{x+=a.get(d);y+=b.get(d);}}
   if(missing.length)return {error:`缺少 ${missing.length} 个自然日的双方完整记录，停止计算（首个：${missing[0]}）`};
   return {earned:amount/10000*x,baseline:amount/10000*y,delta:amount/10000*(x-y),days:(last-first)/86400000+1};
@@ -41,7 +41,7 @@
   if(!ordinary(p))return p;
   if(p.dataDate===date&&finite(p.yield7)&&finite(p.income))return {...p,quoteOrigin:'market',quoteReason:'收益表同日披露'};
   const row=(history?.rows||[]).find(r=>r.date===date&&finite(r.yield7)&&finite(r.income));
-  if(row)return {...p,yield7:row.yield7,income:row.income,dataDate:row.date,updatedAt:history.fetchedAt,source:'天天基金历史收益接口',sourceUrl:history.sourceUrl,quoteOrigin:'history',quoteReason:'收益表缺少同日完整字段，回退到已核验的同日普通货币逐日记录',quoteStatus:'同日历史接口回退'};
+  if(row)return {...p,yield7:row.yield7,income:row.income,dataDate:row.date,updatedAt:row.fetchedAt||history.fetchedAt,source:'天天基金历史收益接口',sourceUrl:row.sourceUrl||history.sourceUrl,quoteOrigin:'history',quoteReason:'收益表缺少同日完整字段，回退到已核验的同日普通货币逐日记录',quoteStatus:'同日历史接口回退'};
   return {...p,yield7:null,income:null,dataDate:null,quoteOrigin:'missing',quoteReason:'收益表及历史接口均无本次披露日的完整可比记录',quoteStatus:'缺少同日行情'};
  }
  function commonWindow(h1,h2,through,maxDays=7){
@@ -57,5 +57,19 @@
   for(const item of status.failures||[]){if(typeof item==='string'&&item.includes('已排除')&&item.includes('缺日拒算'))qualityExclusions.push(item);else failures.push(item);}
   return {...status,failures,qualityExclusions,retained:status.retained||[],missingRecords:status.missingRecords||[]};
  }
- const api={finite,age,ordinary,ranked,limit,reasons,scenario,replay,resolveQuote,commonWindow,healthState};if(typeof module==='object')module.exports=api;else root.Fund=api;
+ function periodStats(rows,end,days,amount=10000){
+  if(!Number.isInteger(days)||days<1||days>366||!finite(amount)||amount<=0||!/^\d{4}-\d{2}-\d{2}$/.test(end))return {complete:false,error:'无效区间'};
+  const start=new Date(Date.parse(end+'T00:00:00Z')-(days-1)*86400000).toISOString().slice(0,10),map=new Map((rows||[]).map(r=>[r.date,r.income]));
+  let total=0;const missing=[];for(let i=0;i<days;i++){const date=new Date(Date.parse(start+'T00:00:00Z')+i*86400000).toISOString().slice(0,10),income=map.get(date);if(!finite(income))missing.push(date);else total+=income;}
+  return {complete:missing.length===0,start,end,days,available:days-missing.length,missing,total:missing.length?null:amount/10000*total,per10k:missing.length?null:total};
+ }
+ function validDate(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const timestamp=Date.parse(value+'T00:00:00Z');return Number.isFinite(timestamp)&&new Date(timestamp).toISOString().slice(0,10)===value;}
+ function validateComparison(value){
+  if(!value||value.version!==1||!finite(value.amount)||value.amount<=0||value.amount>1e9||!Number.isInteger(value.term)||value.term<1||value.term>366)return null;
+  if(!['research','bank','ordinary','wallet','pay'].includes(value.need)||![value.product,value.baseline].every(x=>typeof x==='string'&&/^\d{6}$/.test(x)))return null;
+  if(![value.rate,value.baseRate,value.gap,value.fee,value.target,value.scenario].every(finite)||value.rate< -10||value.rate>20||value.baseRate< -10||value.baseRate>20||!Number.isInteger(value.gap)||value.gap<0||value.gap>365||value.fee<0||value.fee>1e6||value.target<=0||value.target>10000||![-.5,0,.5].includes(value.scenario))return null;
+  if(!['quote','manual'].includes(value.rateMode)||!['quote','manual'].includes(value.baseMode)||!validDate(value.dataDate)||!validDate(value.createdDate))return null;
+  return Object.fromEntries(['version','amount','term','need','product','baseline','rate','baseRate','gap','fee','target','scenario','rateMode','baseMode','dataDate','createdDate'].map(k=>[k,value[k]]));
+ }
+ const api={finite,age,ordinary,ranked,limit,reasons,scenario,replay,resolveQuote,commonWindow,healthState,periodStats,validateComparison};if(typeof module==='object')module.exports=api;else root.Fund=api;
 })(typeof window==='object'?window:globalThis);
