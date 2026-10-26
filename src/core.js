@@ -5,8 +5,15 @@
  const ordinary=p=>p.kind.includes('普通货币');
  function ranked(products,date,metric='yield7'){return products.filter(p=>ordinary(p)&&p.dataDate===date&&finite(p[metric])).sort((a,b)=>b[metric]-a[metric]||a.code.localeCompare(b.code));}
  function limit(text){if(text==='无限额')return Infinity;const m=String(text).match(/^([\d.,]+)(万)?元$/);return m?Number(m[1].replaceAll(',',''))*(m[2]?10000:1):null;}
+ function channelFor(p,c,need,liquidity){
+  if(!c)return c;const member=liquidity?.members?.[p.code];
+  if(!['bank','ordinary'].includes(need)||!member)return c;
+  return {...c,name:'天天基金 · 活期宝充值',minimum:member.minimum,minimumText:`${member.minimum}元（活期宝充值）`,
+   purchaseStatus:member.buy?c.purchaseStatus:'暂停申购',membershipDate:member.dataDate,route:'huoqibao',
+   membershipUrl:liquidity.sources?.members?.url};
+ }
  function reasons(p,c,options){
-  const r=[];const {amount,need,today,date}=options;
+  const r=[];const {amount,need,today,date,liquidity}=options;c=channelFor(p,c,need,liquidity);
   if(!ordinary(p))r.push('浮动净值类别不参加普通货币比较');
   if(p.dataDate!==date||!finite(p.yield7))r.push('缺少同日收益');
   if(age(p.dataDate,today)>3)r.push('收益距今超过3天，暂停匹配');
@@ -16,10 +23,23 @@
   const max=limit(c.purchaseLimit);if(max===null)r.push('申购上限未知');else if(amount>max)r.push('超过渠道单日申购限额');
   if(max!==null&&finite(c.minimum)&&c.minimum>max)r.push('起购与单日限额冲突');
   if(!['开放申购','限大额'].includes(c.purchaseStatus))r.push('未确认开放申购');
-  if(need==='bank')r.push('银行卡快赎额度、时效及资格未验证');
-  if(need==='pay')r.push('消费支付功能未验证');
-  if(need==='ordinary')r.push('普通赎回到银行卡的到账时间未验证');
-  if(need==='wallet')r.push('活期宝极速回款额度、服务时间及资格未验证');
+  if(need!=='research'){
+   const rule=liquidity?.rules?.[need];
+   if(!rule?.verified)r.push('所需公开取用规则未通过本轮来源校验');
+   else if(age(rule.checkedAt,today)>7)r.push('公开取用规则超过7天未更新');
+  }
+  if(['bank','ordinary'].includes(need)){
+   const member=liquidity?.members?.[p.code];
+   if(!member)r.push('未在本轮官方活期宝关联基金清单内，不套用活期宝取现规则');
+   else if(age(member.dataDate,today)>7)r.push('官方活期宝关联清单日期超过7天');
+  }
+  if(need==='bank'){
+   const max=liquidity?.quickDailyLimit;
+   if(!finite(max)||max<=0)r.push('公开快速取现额度缺失');
+   else if(amount>max)r.push(`本金超过单只基金单日快取${max.toLocaleString('zh-CN')}元上限，无法当天全额快速取出`);
+  }
+  if(need==='wallet'&&c.quickWallet!=='支持')r.push(c.quickWallet==='不支持'?'销售渠道明确不支持极速回活期宝':'此份额未披露极速回活期宝支持状态');
+  if(need==='pay'&&!liquidity?.merchantPaymentVerified)r.push('公开支付业务仅核验到购买基金，未列日常商户消费支付，不纳入消费支付候选');
   return r;
  }
  function scenario(amount,days,rate,base,gap=0,fee=0,target=5){
@@ -71,5 +91,5 @@
   if(!['quote','manual'].includes(value.rateMode)||!['quote','manual'].includes(value.baseMode)||!validDate(value.dataDate)||!validDate(value.createdDate))return null;
   return Object.fromEntries(['version','amount','term','need','product','baseline','rate','baseRate','gap','fee','target','scenario','rateMode','baseMode','dataDate','createdDate'].map(k=>[k,value[k]]));
  }
- const api={finite,age,ordinary,ranked,limit,reasons,scenario,replay,resolveQuote,commonWindow,healthState,periodStats,validateComparison};if(typeof module==='object')module.exports=api;else root.Fund=api;
+ const api={finite,age,ordinary,ranked,limit,channelFor,reasons,scenario,replay,resolveQuote,commonWindow,healthState,periodStats,validateComparison};if(typeof module==='object')module.exports=api;else root.Fund=api;
 })(typeof window==='object'?window:globalThis);
