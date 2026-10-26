@@ -1,0 +1,63 @@
+name: Refresh data and publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '23 0 * * *'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: fund-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify and expand initial source package only when sources are absent
+        run: |
+          if [ ! -d src ]; then
+            echo '968753ef9932588ce8bbfb7ec916e9fbeba869ee5bc4ae2b749b317f6550ecdc  source-package.zip' | sha256sum --check
+            unzip -o source-package.zip
+          fi
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Refresh public snapshots with failure preservation
+        if: github.event_name != 'push'
+        run: python3 scripts/refresh.py
+      - name: Validate data and calculations
+        run: |
+          python3 -m unittest discover -s tests -p 'test_*.py'
+          node tests/core.test.cjs
+      - name: Build independent H5
+        run: python3 scripts/build.py
+      - name: Preserve data and status in repository
+        if: github.event_name != 'push'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src scripts tests docs data index.html dist README.md .gitignore
+          git diff --cached --quiet || git commit -m 'Refresh public fund snapshots and source status'
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
