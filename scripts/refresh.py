@@ -1,6 +1,7 @@
 """Public snapshots; conservative parsing, per-source failure preservation, no JS execution."""
 from pathlib import Path
 import datetime as dt, json, urllib.request, time, tempfile, os, hashlib, math, subprocess
+from concurrent.futures import ThreadPoolExecutor
 from import_market import Rows, number
 from import_channels import parse as parse_channel
 
@@ -15,7 +16,7 @@ def save(name,value):
     tmp.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n'); os.replace(tmp,path)
 def fetch(url):
     # OS curl uses the platform trust store. TLS verification remains enabled.
-    return subprocess.run(['curl','--fail','--silent','--show-error','--location','--retry','2','--max-time','30','--user-agent','Mozilla/5.0','--referer','https://fundf10.eastmoney.com/',url],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE).stdout
+    return subprocess.run(['curl','--fail','--silent','--show-error','--location','--retry','1','--retry-max-time','35','--connect-timeout','8','--max-time','15','--user-agent','Mozilla/5.0','--referer','https://fundf10.eastmoney.com/',url],check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE).stdout
 def market(universe_raw, quote_raw, previous):
     import re
     text=universe_raw.decode('utf-8-sig'); all_funds=json.loads(text[text.index('['):text.rindex(']')+1])
@@ -47,6 +48,7 @@ def history_parse(raw):
     if not any(str(row.get('NAVTYPE'))=='1' for row in rows): raise ValueError('无可验证普通货币逐日记录')
     return sorted(result.values(),key=lambda x:x['date'])
 def main():
+    print('Starting public snapshot refresh',now(),flush=True)
     status={'attemptedAt':now(),'market':'failed','failures':[]}; previous=read('products',[])
     products=previous; coverage=read('coverage',{})
     try:
@@ -58,21 +60,28 @@ def main():
     ordinary=[p for p in products if '普通货币' in p['kind'] and p.get('yield7') is not None and p.get('dataDate')==coverage.get('quoteDate')]
     leaders=sorted(ordinary,key=lambda p:-p['yield7'])[:12]
     codes=sorted(set(channels)|{p['code'] for p in leaders})
+    pool=ThreadPoolExecutor(max_workers=4)
+    channel_downloads={code:pool.submit(fetch,f'https://fundf10.eastmoney.com/jjfl_{code}.html') for code in codes}
     for code in codes:
         try:
-            raw=fetch(f'https://fundf10.eastmoney.com/jjfl_{code}.html')
+            raw=channel_downloads[code].result()
             with tempfile.TemporaryDirectory() as folder:
                 path=Path(folder)/(code+'.html'); path.write_bytes(raw); channels[code]=parse_channel(path)
         except Exception as e: status['failures'].append('渠道 '+code+'：'+str(e))
+        print('Channel checked',code,flush=True)
     save('channels',channels)
     targets=sorted(set(codes)|{p['code'] for p in yuebao.get('products',[])})
+    urls={code:f'https://api.fund.eastmoney.com/f10/lsjz?fundCode={code}&pageIndex=1&pageSize=40&endDate={coverage.get("quoteDate","")}' for code in targets}
+    history_downloads={code:pool.submit(fetch,urls[code]) for code in targets}
     for code in targets:
-        url=f'https://api.fund.eastmoney.com/f10/lsjz?fundCode={code}&pageIndex=1&pageSize=40&endDate={coverage.get("quoteDate","")}'
+        url=urls[code]
         try:
-            raw=fetch(url); rows=history_parse(raw); excluded=sum(str(r.get('NAVTYPE'))!='1' for r in json.loads(raw)['Data']['LSJZList'])
+            raw=history_downloads[code].result(); rows=history_parse(raw); excluded=sum(str(r.get('NAVTYPE'))!='1' for r in json.loads(raw)['Data']['LSJZList'])
             history[code]={'rows':rows,'excludedMergedOrOtherRows':excluded,'fetchedAt':now(),'sourceUrl':url,'sha256':hashlib.sha256(raw).hexdigest()}
             if excluded: status['failures'].append('逐日 '+code+'：已排除 '+str(excluded)+' 条合并区间或不同口径记录；相关缺日拒算')
         except Exception as e: status['failures'].append('逐日 '+code+'：'+str(e))
+        print('History checked',code,flush=True)
+    pool.shutdown()
     save('history',history)
     bycode={p['code']:p for p in products}
     for p in yuebao.get('products',[]):
