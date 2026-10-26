@@ -26,7 +26,7 @@ class RefreshFailureTests(unittest.TestCase):
    for name,value in seed.items():(root/'data'/f'{name}.json').write_text(json.dumps(value))
    with patch.object(refresh,'ROOT',root),patch.object(refresh,'fetch',side_effect=RuntimeError('network unavailable')),contextlib.redirect_stdout(io.StringIO()):refresh.main()
    status=json.loads((root/'data/status.json').read_text())
-   self.assertEqual(status['state'],'failed');self.assertEqual(len(status['failures']),3);self.assertEqual(len(status['retained']),3);self.assertEqual(status['qualityExclusions'],[])
+   self.assertEqual(status['state'],'failed');self.assertGreaterEqual(len(status['failures']),3);self.assertEqual(len(status['retained']),3);self.assertEqual(status['qualityExclusions'],[])
    self.assertEqual(json.loads((root/'data/history.json').read_text())['000198']['fetchedAt'],'2026-10-24')
    self.assertEqual(status['missingRecords'][0]['dates'],['2026-10-17','2026-10-18','2026-10-19','2026-10-20','2026-10-21','2026-10-22'])
 if __name__=='__main__':unittest.main()

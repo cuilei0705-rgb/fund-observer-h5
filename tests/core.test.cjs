@@ -30,3 +30,12 @@ test('默认历史区间避开缺口且可计算',()=>{const a=[{date:'2026-10-2
 test('无共同日期直接预检不可回放',()=>{const w=F.commonWindow([{date:'2026-10-23',income:.2}],[{date:'2026-10-22',income:.2}],'2026-10-23');assert.equal(w.days,0);assert.equal(w.start,undefined)});
 test('质量拦截不被当作获取失败',()=>{const s=F.healthState({failures:['逐日 000198：已排除 4 条合并区间或不同口径记录；相关缺日拒算','网络超时']});assert.equal(s.failures.length,1);assert.equal(s.qualityExclusions.length,1)});
 console.log(checks+' total core checks passed');
+test('30日累计与独立公式一致',()=>{const rows=Array.from({length:30},(_,i)=>({date:new Date(Date.UTC(2026,9,1+i)).toISOString().slice(0,10),income:.25}));const x=F.periodStats(rows,'2026-10-30',30,20000);assert.equal(x.complete,true);assert.equal(x.total,15)});
+test('长期历史缺日不当0',()=>{const x=F.periodStats([{date:'2026-10-23',income:.2}],'2026-10-23',30);assert.equal(x.total,null);assert.equal(x.missing.length,29)});
+const shared={version:1,amount:10000,term:90,need:'research',product:'004568',baseline:'000198',rate:1.5,baseRate:.8,gap:1,fee:0,target:5,scenario:0,rateMode:'quote',baseMode:'quote',dataDate:'2026-10-23',createdDate:'2026-10-26'};
+test('分享条件可验证且不保留额外字段',()=>{const x=F.validateComparison({...shared,trackingId:'not allowed'});assert(x);assert(!('trackingId' in x))});
+test('恶意与异常分享参数拒绝',()=>{assert.equal(F.validateComparison({...shared,amount:Infinity}),null);assert.equal(F.validateComparison({...shared,product:'<script>'}),null);assert.equal(F.validateComparison({...shared,term:0}),null)});
+test('鸡腿默认5元',()=>{const x=F.scenario(10000,90,1.5,.8);assert.equal(x.legs,x.delta/5)});
+console.log(checks+' final core checks passed');
+test('分享伪造日历日期拒绝',()=>assert.equal(F.validateComparison({...shared,dataDate:'2026-02-31'}),null));
+console.log(checks+' release core checks passed');
