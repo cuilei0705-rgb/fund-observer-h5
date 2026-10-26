@@ -103,7 +103,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:19+08:00",
+    "fetchedAt": "2026-10-26T14:18:18+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000198&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "34a2784fa49c3010f0c566e5d291773978fda5c85a19e5af8533591e58f2b503"
   },
@@ -211,7 +211,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:20+08:00",
+    "fetchedAt": "2026-10-26T14:18:18+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000300&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "f967cd831ffbe86ea4ceb3f3f432f903848a9b5534eeda8b4ec8a977f6d9d31d"
   },
@@ -319,7 +319,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:18+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000301&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "c0d4bf16ff4d9dc79c70c37f544bd262b35d64a05acbc34bc16e9a89d7000d7e"
   },
@@ -427,7 +427,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:18+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000380&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "6057bb9aab059c84af07e676b405d992084bd918cf1d09b7e6c63cd4f6f6f460"
   },
@@ -535,7 +535,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:18+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000424&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "d1e0fda22771b8b6d3ee100a385365210b68653523a3e32af34035730c1a1f70"
   },
@@ -643,7 +643,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:20+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000575&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "31101125068be477ef6d5226e7dc815e245c379e9fefc2d8ed0d453ad455461a"
   },
@@ -751,9 +751,9 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:20+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000615&pageIndex=1&pageSize=40&endDate=2026-10-23",
-    "sha256": "3722bf24f6b79ac4818897512c24744fdd8c053d0883564bef6469198af9fd85"
+    "sha256": "e4b57028c6210881a7af81177c0c39f8d8448dfe7d35e43e6ca498473a486633"
   },
   "000710": {
     "rows": [
@@ -859,7 +859,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:20+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000710&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "142763fe89f94ab33288dc5d506c3a7615c0b172a42dcb3593f3b730bdd208dc"
   },
@@ -967,9 +967,9 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:20+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=001094&pageIndex=1&pageSize=40&endDate=2026-10-23",
-    "sha256": "b972df40207c9a2261f502cf592c745c62131f16b06e4c3a44380632c753f200"
+    "sha256": "1e1f452685554435385b3ff505de49c7033cb14b73f474d6e9d832ac03b0411c"
   },
   "001134": {
     "rows": [
@@ -1075,7 +1075,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=001134&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "89cac2de801eab3626acb3d93a0aa442725fad555aac41d2571cfb87195f03e2"
   },
@@ -1183,7 +1183,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=001211&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "36313b9055aaf4282d86b24d4ba6320a0bafa92f91b473d165f3044036f5b834"
   },
@@ -1291,7 +1291,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=003022&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "7ba9d8bdaec888dbb3575a7e76aa3e0a2a20a7d3ebe877f79fe48499eaeba381"
   },
@@ -1399,7 +1399,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=003171&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "d4702426f07f2714b0407f65430fa225d17db64ac82f0f92af62e6e6504b415f"
   },
@@ -1507,7 +1507,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=003253&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "d97e82e597f3eeb891debe8964a5adf32660da1e9f9e62f4382ab96f22c91e9a"
   },
@@ -1615,7 +1615,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:23+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=003391&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "84529d1de04b4dcbc5c55ac4c71383d82bf9bc79dd06bf0ef50fe8d6ec5ce4bd"
   },
@@ -1723,7 +1723,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:24+08:00",
+    "fetchedAt": "2026-10-26T14:18:23+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=003515&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "fbf5ce96efe4c2187bf05bef981fbcc5283d04e07701d72a9386ac6d588649a5"
   },
@@ -1831,7 +1831,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:25+08:00",
+    "fetchedAt": "2026-10-26T14:18:23+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=004072&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "95f871afa174493633bc3c4ad9a3fea8e1a2c9d7a3862bc0d82f0139d350161f"
   },
@@ -1939,7 +1939,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:25+08:00",
+    "fetchedAt": "2026-10-26T14:18:24+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=004251&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "7b14ea23ce5a97bf3130d6854a5c9849f6bd67f30f43b5d1b8e8a9210d38315c"
   },
@@ -2047,9 +2047,9 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:25+08:00",
+    "fetchedAt": "2026-10-26T14:18:24+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=004502&pageIndex=1&pageSize=40&endDate=2026-10-23",
-    "sha256": "6e1abedd868c2ab77df129470aacd79762fe5633a17cebf5a2d023b0126da60c"
+    "sha256": "4882f87034d4e89bb851fab486a300127ad8163b4efb463593ec793228aafd90"
   },
   "004568": {
     "rows": [
@@ -2155,7 +2155,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:25+08:00",
+    "fetchedAt": "2026-10-26T14:18:25+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=004568&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "02caf1e4955019f1c020a4d0ba5dfc5163f1479970ce94d7a4936b63ec5ea7ed"
   },
@@ -2263,7 +2263,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:26+08:00",
+    "fetchedAt": "2026-10-26T14:18:25+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=005162&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "49423d402ad25e7484b563cab1c471a6c203bea15bbb81712dfd767ca5ce0cb2"
   },
@@ -2371,9 +2371,9 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:28+08:00",
+    "fetchedAt": "2026-10-26T14:18:26+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=010051&pageIndex=1&pageSize=40&endDate=2026-10-23",
-    "sha256": "e7ece6c0fb2ea3f021a9a7ff22e73266488d59a8f86bb4159cc72c39092212c2"
+    "sha256": "27b7cc405225d3a058aa8b94403f13229ecde05212f7e5d095b52b5b72fb5e74"
   },
   "021169": {
     "rows": [
@@ -2479,7 +2479,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:28+08:00",
+    "fetchedAt": "2026-10-26T14:18:26+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=021169&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "e799f038dfa75734790e80a43dac7ff29d1de7e1738c30c89182620060ebd01e"
   },
@@ -2587,7 +2587,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:29+08:00",
+    "fetchedAt": "2026-10-26T14:18:26+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=050003&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "f72b597072fe4393df4655de0bfbecf876b364d5a7f35d481d7143b7a9cdec9c"
   },
@@ -2695,7 +2695,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:29+08:00",
+    "fetchedAt": "2026-10-26T14:18:27+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=090022&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "9c79aae2cbb81acb1b368f97322aa511e89cdddbc2be07d3747d4a574229fe0b"
   },
@@ -2803,7 +2803,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:27+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=161608&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "e1ad4f20eb20a27668bae26869af43ee71327f6911e608295b476bb306bc4b48"
   },
@@ -2911,7 +2911,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 0,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:27+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=200003&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "9fa33f3d107be467cb3c7f3443fb217ee5dd5f395a3bdb92b2bb1d6e04c7e090"
   },
@@ -2999,7 +2999,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:19+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000505&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "44011faec064b4dbf96fef3b1a43c7a0309a598a7f6af52a615b26e9453e79a4"
   },
@@ -3087,7 +3087,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:21+08:00",
+    "fetchedAt": "2026-10-26T14:18:19+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=000559&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "cdb38af7479504693fa534d7726c2e55f8a86b073e8667dade8fc6ce3c0aa709"
   },
@@ -3175,7 +3175,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:22+08:00",
+    "fetchedAt": "2026-10-26T14:18:20+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=001026&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "7967ac30fbe1b5baafb468cebf949980f7f81cf34d53dfe83602ed54641ab296"
   },
@@ -3263,7 +3263,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:23+08:00",
+    "fetchedAt": "2026-10-26T14:18:22+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=001232&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "11ba911988d02bded0001fa6b7882040fb3c16af5a87f2ea28cb334b534c47c8"
   },
@@ -3351,7 +3351,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:26+08:00",
+    "fetchedAt": "2026-10-26T14:18:25+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=004869&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "7372c1e8b257553d1631b39140e005304dca439cd14c1dff7854e8c90e5e33ff"
   },
@@ -3439,7 +3439,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:28+08:00",
+    "fetchedAt": "2026-10-26T14:18:26+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=040038&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "192ee108caf406c15e112c8c12a5308694d3d10520b3c747ebca6687949177aa"
   },
@@ -3527,7 +3527,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:29+08:00",
+    "fetchedAt": "2026-10-26T14:18:27+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=150005&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "1e5892a8bdc150a35d97665af9f8ecfa793dfc79df68001e6551aaafa2d32ae5"
   },
@@ -3615,9 +3615,9 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:27+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=180008&pageIndex=1&pageSize=40&endDate=2026-10-23",
-    "sha256": "564256289fc383ff2bcc2e9b62fe5e1cf923af636173627c59136faf8bbbd1bf"
+    "sha256": "202bc90bff5e34fb1d111b8132fda8228bc74cd46462b399b99d8e6263d2789f"
   },
   "360003": {
     "rows": [
@@ -3703,7 +3703,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:29+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=360003&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "1a2f3ca2aa4d5e13dc8adf72603a8c9baf40c1dbfc656bd2ab06b96e555ddc03"
   },
@@ -3791,7 +3791,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:29+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=460006&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "c3e1af2e450b4b2749a031d93a8e81f0188532c88b15c9508fecb3fdd9ecdd5d"
   },
@@ -3879,7 +3879,7 @@
       }
     ],
     "excludedMergedOrOtherRows": 4,
-    "fetchedAt": "2026-10-26T13:37:30+08:00",
+    "fetchedAt": "2026-10-26T14:18:29+08:00",
     "sourceUrl": "https://api.fund.eastmoney.com/f10/lsjz?fundCode=519999&pageIndex=1&pageSize=40&endDate=2026-10-23",
     "sha256": "aff1db7addd7b1fdb33139437b5fe121efe736dd6312fd5c2a78d8fa653d76fa"
   }
