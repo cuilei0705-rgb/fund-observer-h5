@@ -36,5 +36,26 @@
   if(missing.length)return {error:`缺少 ${missing.length} 个自然日的双方完整记录，停止计算（首个：${missing[0]}）`};
   return {earned:amount/10000*x,baseline:amount/10000*y,delta:amount/10000*(x-y),days:(last-first)/86400000+1};
  }
- const api={finite,age,ordinary,ranked,limit,reasons,scenario,replay};if(typeof module==='object')module.exports=api;else root.Fund=api;
+ function resolveQuote(product,date,history){
+  const p={...product};
+  if(!ordinary(p))return p;
+  if(p.dataDate===date&&finite(p.yield7)&&finite(p.income))return {...p,quoteOrigin:'market',quoteReason:'收益表同日披露'};
+  const row=(history?.rows||[]).find(r=>r.date===date&&finite(r.yield7)&&finite(r.income));
+  if(row)return {...p,yield7:row.yield7,income:row.income,dataDate:row.date,updatedAt:history.fetchedAt,source:'天天基金历史收益接口',sourceUrl:history.sourceUrl,quoteOrigin:'history',quoteReason:'收益表缺少同日完整字段，回退到已核验的同日普通货币逐日记录',quoteStatus:'同日历史接口回退'};
+  return {...p,yield7:null,income:null,dataDate:null,quoteOrigin:'missing',quoteReason:'收益表及历史接口均无本次披露日的完整可比记录',quoteStatus:'缺少同日行情'};
+ }
+ function commonWindow(h1,h2,through,maxDays=7){
+  const dates=rows=>(rows||[]).filter(r=>finite(r.income)&&r.date<=through).map(r=>r.date).sort();
+  const candidateDates=dates(h1),baselineDates=dates(h2),a=new Set(candidateDates),b=new Set(baselineDates),sharedDates=[...a].filter(d=>b.has(d)).sort();
+  const end=sharedDates.at(-1);let start=end,days=end?1:0;
+  while(start&&days<maxDays){const prev=new Date(Date.parse(start+'T00:00:00Z')-86400000).toISOString().slice(0,10);if(!a.has(prev)||!b.has(prev))break;start=prev;days++;}
+  const missing=[];for(let i=maxDays-1;i>=0;i--){const date=new Date(Date.parse(through+'T00:00:00Z')-i*86400000).toISOString().slice(0,10);if(!a.has(date)||!b.has(date))missing.push({date,candidate:!a.has(date),baseline:!b.has(date)});}
+  return {start,end,days,candidateDates,baselineDates,sharedDates,missing};
+ }
+ function healthState(status){
+  const failures=[],qualityExclusions=[...(status.qualityExclusions||[])];
+  for(const item of status.failures||[]){if(typeof item==='string'&&item.includes('已排除')&&item.includes('缺日拒算'))qualityExclusions.push(item);else failures.push(item);}
+  return {...status,failures,qualityExclusions,retained:status.retained||[],missingRecords:status.missingRecords||[]};
+ }
+ const api={finite,age,ordinary,ranked,limit,reasons,scenario,replay,resolveQuote,commonWindow,healthState};if(typeof module==='object')module.exports=api;else root.Fund=api;
 })(typeof window==='object'?window:globalThis);
