@@ -27,11 +27,13 @@ def market(universe_raw, quote_raw, previous):
     if len(dates)!=2 or dates[0]>dt.date.today().isoformat(): raise ValueError('收益日期结构异常')
     quotes={r[3]:r for r in parser.rows if len(r)==16 and re.fullmatch(r'\d{6}',r[3])}
     if len(universe)<500 or len(quotes)<100: raise ValueError('来源覆盖骤减，保留旧快照')
-    # The page opens today's empty column before publishing today's yields.
-    # Use the newest dated column with actual, complete observations, never relabel values.
+    # A date can start with a handful of early disclosures. Do not replace a
+    # broad comparable batch with that sparse column, even if it is nonempty.
+    complete_counts=[sum(number(r[5+3*i]) is not None and number(r[6+3*i]) is not None for r in quotes.values()) for i in range(2)]
+    minimum_batch=max(100,math.ceil(max(complete_counts)*0.8))
     column=next((i for i in sorted(range(2),key=lambda i:dates[i],reverse=True)
-        if any(number(r[5+3*i]) is not None and number(r[6+3*i]) is not None for r in quotes.values())),None)
-    if column is None: raise ValueError('收益表两日期列均未披露完整收益，保留旧快照')
+        if complete_counts[i]>=minimum_batch),None)
+    if column is None: raise ValueError('收益表没有覆盖足够的完整日期列，保留旧快照')
     quote_date=dates[column]
     old={p['code']:p for p in previous}; products=[]
     for code in sorted(set(universe)|set(quotes)|set(old)):
@@ -44,7 +46,8 @@ def market(universe_raw, quote_raw, previous):
         products.append(a)
     coverage=dict(total=len(products),universeCount=len(universe),quoteRows=len(quotes),yieldCount=sum(p['yield7'] is not None for p in products),incomeCount=sum(p['income'] is not None for p in products),missingYieldCount=sum(p['yield7'] is None for p in products),floatingCount=sum('浮动' in p['kind'] for p in products),quoteDate=dates[0],fetchedAt=now(),newCodes=sorted((set(universe)|set(quotes))-set(old)),notSeenCount=sum(p['discoveryStatus'].startswith('本次来源未收录') for p in products),scope='公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录',completeness='未与监管名录逐项核对，基金公司及销售渠道覆盖不完整。各份额不等于独立基金；缺失及存续未知均保留。',sources=[{'url':url,'sha256':hashlib.sha256(raw).hexdigest()} for url,raw in [('https://fund.eastmoney.com/js/fundcode_search.js',universe_raw),('https://fund.eastmoney.com/HBJJ_pjsyl.html',quote_raw)]])
     coverage.update(quoteDate=quote_date,latestHeaderDate=max(dates),
-        dateSelectionReason='最新表头日期尚无完整收益，采用表内最近已披露日期列' if column else '使用最新已披露日期列')
+        dateSelectionReason='最新日期仅部分披露，采用表内覆盖充分的最近日期列' if dates[column]!=max(dates) else '使用覆盖充分的最新披露日期列',
+        minimumBatchCount=minimum_batch,columnCoverage={d:n for d,n in zip(dates,complete_counts)},latestHeaderCompleteCount=complete_counts[dates.index(max(dates))])
     return products,coverage
 def history_parse(raw):
     data=json.loads(raw); rows=(data.get('Data') or {}).get('LSJZList')
@@ -56,13 +59,24 @@ def history_parse(raw):
         if income is not None and math.isfinite(income): result[date]={'date':date,'income':income,'yield7':y}
     if not any(str(row.get('NAVTYPE'))=='1' for row in rows): raise ValueError('无可验证普通货币逐日记录')
     return sorted(result.values(),key=lambda x:x['date'])
+def market_date_correction(current,previous):
+    if current['quoteDate']>=previous.get('quoteDate',''):return None
+    threshold=current.get('minimumBatchCount',100)
+    if not (previous.get('quoteDate')==current.get('latestHeaderDate')
+        and previous.get('yieldCount',0)<threshold
+        and current.get('latestHeaderCompleteCount',threshold)<threshold
+        and current.get('columnCoverage',{}).get(current['quoteDate'],0)>=threshold):
+        raise ValueError('来源日期倒退')
+    return {'fromDate':previous['quoteDate'],'toDate':current['quoteDate'],'reason':'修复旧版将少量新日披露替代完整批次的问题；未更改收益原始日期'}
+
 def main():
     print('Starting public snapshot refresh',now(),flush=True)
     status={'attemptedAt':now(),'market':'failed','failures':[],'qualityExclusions':[],'retained':[],'missingRecords':[]}; previous=read('products',[])
     products=previous; coverage=read('coverage',{})
     try:
         products,coverage=market(fetch('https://fund.eastmoney.com/js/fundcode_search.js'),fetch('https://fund.eastmoney.com/HBJJ_pjsyl.html'),previous)
-        if coverage['quoteDate']<read('coverage',{}).get('quoteDate',''): raise ValueError('来源日期倒退')
+        correction=market_date_correction(coverage,read('coverage',{}))
+        if correction:status['marketDateCorrection']=correction
         save('products',products); save('coverage',coverage); status['market']='success'
     except Exception as e:
         status['failures'].append('市场快照：'+str(e));status['retained'].append({'area':'行情','fetchedAt':coverage.get('fetchedAt'),'reason':'获取或结构验证失败，沿用上次市场快照'})

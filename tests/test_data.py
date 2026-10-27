@@ -73,3 +73,32 @@ class MarketDateColumnTests(unittest.TestCase):
    def feed(self,_):pass
   with patch.object(refresh,'Rows',Parser):
    with self.assertRaises(ValueError):market(universe,b'',[])
+
+class PartialMarketBatchTests(unittest.TestCase):
+ def batch(self,new_count,old_count):
+  from unittest.mock import patch
+  import refresh
+  universe=('var funds='+json.dumps([[f'{i:06d}','X','样本','货币型-普通货币','X'] for i in range(500)])+';').encode()
+  rows=[['2026-10-27','2026-10-26']]+[['','','',f'{i:06d}','样本',('0.3' if i<new_count else '---'),('1.1%' if i<new_count else '---'),'---',('0.2' if i<old_count else '---'),('0.8%' if i<old_count else '---'),'---','---','','','',''] for i in range(500)]
+  class Parser:
+   def __init__(self):self.rows=rows
+   def feed(self,_):pass
+  with patch.object(refresh,'Rows',Parser):return market(universe,b'',[])
+ def test_sparse_new_day_cannot_displace_broad_previous_batch(self):
+  products,c=self.batch(12,480)
+  self.assertEqual(c['quoteDate'],'2026-10-26');self.assertEqual(c['yieldCount'],480)
+  self.assertEqual(c['latestHeaderCompleteCount'],12);self.assertEqual(c['columnCoverage']['2026-10-27'],12)
+  self.assertEqual(products[0]['dataDate'],'2026-10-26');self.assertEqual(products[0]['yield7'],.8)
+ def test_sufficiently_disclosed_new_day_advances(self):
+  _,c=self.batch(450,480);self.assertEqual(c['quoteDate'],'2026-10-27')
+ def test_both_sparse_days_fail_closed(self):
+  with self.assertRaises(ValueError):self.batch(12,20)
+
+class MarketDateRepairTests(unittest.TestCase):
+ def test_only_proven_sparse_date_can_be_repaired(self):
+  from refresh import market_date_correction
+  current={'quoteDate':'2026-10-26','latestHeaderDate':'2026-10-27','minimumBatchCount':436,'latestHeaderCompleteCount':12,'columnCoverage':{'2026-10-26':544,'2026-10-27':12}}
+  result=market_date_correction(current,{'quoteDate':'2026-10-27','yieldCount':12})
+  self.assertEqual(result['toDate'],'2026-10-26')
+  with self.assertRaises(ValueError):market_date_correction(current,{'quoteDate':'2026-10-27','yieldCount':500})
+  with self.assertRaises(ValueError):market_date_correction(current,{'quoteDate':'2026-10-28','yieldCount':12})
