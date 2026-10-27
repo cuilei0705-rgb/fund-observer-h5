@@ -30,3 +30,46 @@ class RefreshFailureTests(unittest.TestCase):
    self.assertEqual(json.loads((root/'data/history.json').read_text())['000198']['fetchedAt'],'2026-10-24')
    self.assertEqual(status['missingRecords'][0]['dates'],['2026-10-17','2026-10-18','2026-10-19','2026-10-20','2026-10-21','2026-10-22'])
 if __name__=='__main__':unittest.main()
+
+class PublicLiquidityTests(unittest.TestCase):
+ def test_members_parser_does_not_execute_javascript(self):
+  from import_liquidity import members
+  value={'ErrCode':0,'Datas':[{'FCODE':f'{i:06d}','PDATE':'2026-10-23','MINSG':'10','BUY':True,'SHORTNAME':'样本'} for i in range(10)]}
+  raw=('var hqb_newdatas=('+json.dumps(value)+');').encode()
+  self.assertEqual(len(members(raw)),10)
+  with self.assertRaises(ValueError):members(raw+b';fetch("https://example.test")')
+ def test_rule_content_change_invalidates_only_affected_capability(self):
+  from import_liquidity import refresh,CHECKS,SOURCES
+  raw_members={'ErrCode':0,'Datas':[{'FCODE':f'{i:06d}','PDATE':'2026-10-23','MINSG':'10','BUY':True,'SHORTNAME':'样本'} for i in range(10)]}
+  def source(url):
+   key=next(k for k,(_,u) in SOURCES.items() if u==url)
+   if key=='members':return ('var hqb_newdatas=('+json.dumps(raw_members)+');').encode()
+   if key=='quick':return b'<html>rules changed</html>'
+   return ('<div>'+''.join(CHECKS[key])+'</div>').encode()
+  status={'failures':[],'retained':[]};previous={'sources':{'quick':{'valid':True,'checkedAt':'2026-10-24'}}}
+  result=refresh(source,previous,status,lambda:'2026-10-26')
+  self.assertFalse(result['rules']['bank']['verified']);self.assertTrue(result['rules']['ordinary']['verified']);self.assertTrue(result['rules']['wallet']['verified'])
+  self.assertEqual(result['sources']['quick']['checkedAt'],'2026-10-24');self.assertFalse(result['sources']['quick']['valid']);self.assertEqual(len(status['retained']),1)
+
+class MarketDateColumnTests(unittest.TestCase):
+ def test_empty_today_column_uses_actual_previous_date(self):
+  from unittest.mock import patch
+  import refresh
+  universe=('var funds='+json.dumps([[f'{i:06d}','X','样本','货币型-普通货币','X'] for i in range(500)])+';').encode()
+  rows=[['2026-10-26','2026-10-23']]+[['','','',f'{i:06d}','样本','---','---','---','0.2','0.8%','---','---','','','',''] for i in range(100)]
+  class Parser:
+   def __init__(self):self.rows=rows
+   def feed(self,_):pass
+  with patch.object(refresh,'Rows',Parser):products,coverage=market(universe,b'',[])
+  self.assertEqual(coverage['quoteDate'],'2026-10-23');self.assertEqual(coverage['latestHeaderDate'],'2026-10-26')
+  self.assertEqual(products[0]['dataDate'],'2026-10-23');self.assertEqual(products[0]['yield7'],.8)
+ def test_all_empty_columns_rejected(self):
+  from unittest.mock import patch
+  import refresh
+  universe=('var funds='+json.dumps([[f'{i:06d}','X','样本','货币型-普通货币','X'] for i in range(500)])+';').encode()
+  rows=[['2026-10-26','2026-10-23']]+[['','','',f'{i:06d}','样本','---','---','---','---','---','---','---','','','',''] for i in range(100)]
+  class Parser:
+   def __init__(self):self.rows=rows
+   def feed(self,_):pass
+  with patch.object(refresh,'Rows',Parser):
+   with self.assertRaises(ValueError):market(universe,b'',[])

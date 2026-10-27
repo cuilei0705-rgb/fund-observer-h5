@@ -39,3 +39,17 @@ test('鸡腿默认5元',()=>{const x=F.scenario(10000,90,1.5,.8);assert.equal(x.
 console.log(checks+' final core checks passed');
 test('分享伪造日历日期拒绝',()=>assert.equal(F.validateComparison({...shared,dataDate:'2026-02-31'}),null));
 console.log(checks+' release core checks passed');
+const rules={members:{'000001':{minimum:10,buy:true,dataDate:'2026-10-23'}},quickDailyLimit:10000,rules:Object.fromEntries(['bank','ordinary','wallet','pay'].map(need=>[need,{verified:true,checkedAt:'2026-10-26'}]))};
+test('公开银行卡快取规则允许1万元候选',()=>assert.deepEqual(F.reasons(p,c,{...o,need:'bank',liquidity:rules}),[]));
+test('全额快取超过公开1万元上限排除',()=>assert(F.reasons(p,c,{...o,amount:10000.01,need:'bank',liquidity:rules}).some(x=>x.includes('无法当天全额'))));
+test('普通取现不套用快取1万元限制',()=>assert.deepEqual(F.reasons(p,c,{...o,amount:50000,need:'ordinary',liquidity:rules}),[]));
+test('非活期宝关联份额不得套用取现规则',()=>assert(F.reasons({...p,code:'000002'},c,{...o,need:'bank',liquidity:rules}).some(x=>x.includes('关联基金清单'))));
+test('极速回活期宝按份额支持字段放行',()=>assert.deepEqual(F.reasons(p,{...c,quickWallet:'支持'},{...o,need:'wallet',liquidity:rules}),[]));
+test('明确不支持极速回活期宝时排除',()=>assert(F.reasons(p,{...c,quickWallet:'不支持'},{...o,need:'wallet',liquidity:rules}).some(x=>x.includes('明确不支持'))));
+test('公开规则过期停止匹配',()=>assert(F.reasons(p,c,{...o,need:'bank',liquidity:{...rules,rules:{bank:{verified:true,checkedAt:'2026-10-01'}}}}).some(x=>x.includes('超过7天'))));
+test('公开规则校验失败停止匹配',()=>assert(F.reasons(p,c,{...o,need:'bank',liquidity:{...rules,rules:{bank:{verified:false}}}}).some(x=>x.includes('来源校验'))));
+test('基金支付不得冒充商户消费支付',()=>assert(F.reasons(p,c,{...o,need:'pay',liquidity:rules}).some(x=>x.includes('日常商户消费'))));
+test('活期宝充值门槛按独立渠道证据应用且不修改原记录',()=>{const source={...c,minimum:5000000,minimumText:'500万元'};const offer=F.channelFor(p,source,'bank',rules);assert.equal(offer.minimum,10);assert.equal(source.minimum,5000000);assert.deepEqual(F.reasons(p,source,{...o,need:'bank',liquidity:rules}),[]);assert(F.reasons(p,source,o).length)});
+test('关联份额暂停充值时排除',()=>assert(F.reasons(p,c,{...o,need:'bank',liquidity:{...rules,members:{'000001':{minimum:10,buy:false,dataDate:'2026-10-23'}}}}).some(x=>x.includes('开放申购'))));
+test('个人账户字段不参与公开规则判断',()=>assert.deepEqual(F.reasons(p,{...c,personalQuota:0,bankBound:false},{...o,need:'bank',liquidity:rules}),[]));
+console.log(checks+' liquidity release core checks passed');

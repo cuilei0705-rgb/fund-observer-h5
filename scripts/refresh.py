@@ -4,6 +4,7 @@ import datetime as dt, json, urllib.request, time, tempfile, os, hashlib, math, 
 from concurrent.futures import ThreadPoolExecutor
 from import_market import Rows, number
 from import_channels import parse as parse_channel
+from import_liquidity import refresh as refresh_liquidity
 
 ROOT=Path(__file__).resolve().parents[1]
 TZ=dt.timezone(dt.timedelta(hours=8))
@@ -26,16 +27,24 @@ def market(universe_raw, quote_raw, previous):
     if len(dates)!=2 or dates[0]>dt.date.today().isoformat(): raise ValueError('收益日期结构异常')
     quotes={r[3]:r for r in parser.rows if len(r)==16 and re.fullmatch(r'\d{6}',r[3])}
     if len(universe)<500 or len(quotes)<100: raise ValueError('来源覆盖骤减，保留旧快照')
+    # The page opens today's empty column before publishing today's yields.
+    # Use the newest dated column with actual, complete observations, never relabel values.
+    column=next((i for i in sorted(range(2),key=lambda i:dates[i],reverse=True)
+        if any(number(r[5+3*i]) is not None and number(r[6+3*i]) is not None for r in quotes.values())),None)
+    if column is None: raise ValueError('收益表两日期列均未披露完整收益，保留旧快照')
+    quote_date=dates[column]
     old={p['code']:p for p in previous}; products=[]
     for code in sorted(set(universe)|set(quotes)|set(old)):
         u=universe.get(code); r=quotes.get(code); a=dict(old.get(code,{}))
         name=u[2] if u else (r[4].removesuffix('基金吧档案') if r else a['name'])
         kind=u[3] if u else a.get('kind','分类待核验')
-        y=number(r[6]) if r else None; income=number(r[5]) if r else None
+        y=number(r[6+3*column]) if r else None; income=number(r[5+3*column]) if r else None
         if y is not None and (not math.isfinite(y) or abs(y)>100): raise ValueError('年化口径异常')
-        a.update(id=code,code=code,name=name,kind=kind,shareClass=re.search(r'([A-Z])$',name).group(1) if re.search(r'([A-Z])$',name) else '未识别',yield7=y,income=income,dataDate=dates[0] if r else None,updatedAt=now(),discoveryStatus='来源本次收录' if u or r else '本次来源未收录；保留追踪，存续待核验',purchaseStatus='存续/开放/渠道可购状态待核验',source='天天基金公开收益表' if r else '天天基金代码总表',sourceUrl='https://fund.eastmoney.com/HBJJ_pjsyl.html' if r else 'https://fund.eastmoney.com/js/fundcode_search.js',detailUrl=f'https://fund.eastmoney.com/{code}.html',dataMode='每日公开快照流水线',quoteStatus='本次有收益' if y is not None else '本次缺失，不以旧值冒充当前')
+        a.update(id=code,code=code,name=name,kind=kind,shareClass=re.search(r'([A-Z])$',name).group(1) if re.search(r'([A-Z])$',name) else '未识别',yield7=y,income=income,dataDate=quote_date if r else None,updatedAt=now(),discoveryStatus='来源本次收录' if u or r else '本次来源未收录；保留追踪，存续待核验',purchaseStatus='存续/开放/渠道可购状态待核验',source='天天基金公开收益表' if r else '天天基金代码总表',sourceUrl='https://fund.eastmoney.com/HBJJ_pjsyl.html' if r else 'https://fund.eastmoney.com/js/fundcode_search.js',detailUrl=f'https://fund.eastmoney.com/{code}.html',dataMode='每日公开快照流水线',quoteStatus='本次有收益' if y is not None else '本次缺失，不以旧值冒充当前')
         products.append(a)
     coverage=dict(total=len(products),universeCount=len(universe),quoteRows=len(quotes),yieldCount=sum(p['yield7'] is not None for p in products),incomeCount=sum(p['income'] is not None for p in products),missingYieldCount=sum(p['yield7'] is None for p in products),floatingCount=sum('浮动' in p['kind'] for p in products),quoteDate=dates[0],fetchedAt=now(),newCodes=sorted((set(universe)|set(quotes))-set(old)),notSeenCount=sum(p['discoveryStatus'].startswith('本次来源未收录') for p in products),scope='公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录',completeness='未与监管名录逐项核对，基金公司及销售渠道覆盖不完整。各份额不等于独立基金；缺失及存续未知均保留。',sources=[{'url':url,'sha256':hashlib.sha256(raw).hexdigest()} for url,raw in [('https://fund.eastmoney.com/js/fundcode_search.js',universe_raw),('https://fund.eastmoney.com/HBJJ_pjsyl.html',quote_raw)]])
+    coverage.update(quoteDate=quote_date,latestHeaderDate=max(dates),
+        dateSelectionReason='最新表头日期尚无完整收益，采用表内最近已披露日期列' if column else '使用最新已披露日期列')
     return products,coverage
 def history_parse(raw):
     data=json.loads(raw); rows=(data.get('Data') or {}).get('LSJZList')
@@ -58,9 +67,10 @@ def main():
     except Exception as e:
         status['failures'].append('市场快照：'+str(e));status['retained'].append({'area':'行情','fetchedAt':coverage.get('fetchedAt'),'reason':'获取或结构验证失败，沿用上次市场快照'})
     channels=read('channels',{}); history=read('history',{}); yuebao=read('yuebao',{})
+    liquidity=refresh_liquidity(fetch,read('liquidity',{}),status,now);save('liquidity',liquidity)
     ordinary=[p for p in products if '普通货币' in p['kind'] and p.get('yield7') is not None and p.get('dataDate')==coverage.get('quoteDate')]
     leaders=sorted(ordinary,key=lambda p:-p['yield7'])[:12]
-    codes=sorted(set(channels)|{p['code'] for p in leaders})
+    codes=sorted(set(channels)|{p['code'] for p in leaders}|set(liquidity['members']))
     pool=ThreadPoolExecutor(max_workers=4)
     channel_downloads={code:pool.submit(fetch,f'https://fundf10.eastmoney.com/jjfl_{code}.html') for code in codes}
     for code in codes:
