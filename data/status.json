@@ -1,5 +1,5 @@
 {
-  "attemptedAt": "2026-10-29T13:06:54+08:00",
+  "attemptedAt": "2026-10-29T19:06:04+08:00",
   "market": "success",
   "failures": [],
   "qualityExclusions": [
@@ -347,7 +347,7 @@
       "impact": "相关区间回放拒算；不影响同日已核验行情"
     }
   ],
-  "finishedAt": "2026-10-29T13:07:47+08:00",
+  "finishedAt": "2026-10-29T19:07:17+08:00",
   "channelCount": 80,
   "historyCount": 100,
   "state": "success"
