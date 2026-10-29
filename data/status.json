@@ -1,16 +1,7 @@
 {
-  "attemptedAt": "2026-10-29T09:24:48+08:00",
+  "attemptedAt": "2026-10-29T13:06:54+08:00",
   "market": "success",
-  "failures": [
-    "渠道 000638：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000638.html']' returned non-zero exit status 28.",
-    "渠道 003391：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003391.html']' returned non-zero exit status 28.",
-    "渠道 003535：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003535.html']' returned non-zero exit status 28.",
-    "渠道 003871：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003871.html']' returned non-zero exit status 28.",
-    "渠道 004173：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004173.html']' returned non-zero exit status 28.",
-    "渠道 004331：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004331.html']' returned non-zero exit status 28.",
-    "渠道 004863：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004863.html']' returned non-zero exit status 28.",
-    "渠道 400005：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_400005.html']' returned non-zero exit status 28."
-  ],
+  "failures": [],
   "qualityExclusions": [
     "逐日 000505：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 000559：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
@@ -21,12 +12,12 @@
     "逐日 001026：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 001232：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 001666：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
-    "逐日 001871：本轮已排除 18 条合并区间或不同口径记录；相关缺日拒算",
+    "逐日 001871：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 001992：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 003871：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004167：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004179：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
-    "逐日 004210：本轮已排除 18 条合并区间或不同口径记录；相关缺日拒算",
+    "逐日 004210：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004286：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004331：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004368：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
@@ -47,48 +38,7 @@
     "逐日 519999：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 660007：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算"
   ],
-  "retained": [
-    {
-      "area": "渠道",
-      "code": "000638",
-      "fetchedAt": "2026-10-28T19:05:14+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "003391",
-      "fetchedAt": "2026-10-28T13:05:52+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "003535",
-      "fetchedAt": "2026-10-28T19:05:52+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "003871",
-      "fetchedAt": "2026-10-28T19:05:52+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "004173",
-      "fetchedAt": "2026-10-28T19:05:52+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "004331",
-      "fetchedAt": "2026-10-28T19:05:56+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "004863",
-      "fetchedAt": "2026-10-28T19:05:59+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "400005",
-      "fetchedAt": "2026-10-28T13:06:04+08:00"
-    }
-  ],
+  "retained": [],
   "missingRecords": [
     {
       "area": "历史近7日",
@@ -397,8 +347,8 @@
       "impact": "相关区间回放拒算；不影响同日已核验行情"
     }
   ],
-  "finishedAt": "2026-10-29T09:26:49+08:00",
+  "finishedAt": "2026-10-29T13:07:47+08:00",
   "channelCount": 80,
   "historyCount": 100,
-  "state": "partial"
+  "state": "success"
 }
