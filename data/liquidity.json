@@ -3,63 +3,63 @@
     "members": {
       "title": "活期宝官方关联基金清单",
       "url": "https://huoqibao.1234567.com.cn/json/hqb_newdatas.js?t=20200619",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:17+08:00",
       "sha256": "fd6a5bec8d8fbdb4cc194ebd392fe77bce6140fa37113bf706b3b618532aa3e5",
       "valid": true
     },
     "service": {
       "title": "活期宝官方服务说明",
       "url": "https://huoqibao.1234567.com.cn/",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:17+08:00",
       "sha256": "d1901d621bfa6974710f86843a4d0dd498eefa915c41732ff3bf90e1e1e08ff7",
       "valid": true
     },
     "limits": {
       "title": "普通与快速取现规则",
       "url": "https://help.1234567.com.cn/question_885.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:17+08:00",
       "sha256": "e387415e40cafa4418d0a210bacc7cc2eccc6a891cf2327d1311be37cadb620a",
       "valid": true
     },
     "quick": {
       "title": "快速取现到账时间",
       "url": "https://help.1234567.com.cn/question_1034.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:17+08:00",
       "sha256": "c673c5655c5fd77727c919e0116d13c35afa46212f21548f52a755c019d59b20",
       "valid": true
     },
     "ordinary": {
       "title": "普通取现到账时间",
       "url": "https://help.1234567.com.cn/question_1122.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:18+08:00",
       "sha256": "d427557c8de7a9912d116a37209d826763a230608444f4cc7a24003c03b11f24",
       "valid": true
     },
     "wallet": {
       "title": "极速赎回到活期宝说明",
       "url": "https://help.1234567.com.cn/question_834.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:19+08:00",
       "sha256": "3ff54d07d9fc1b57049ab4c9d6da437029e86fbef4e4ec17eab7e25fac46bb03",
       "valid": true
     },
     "wallet_alt": {
       "title": "活期宝转换与赎回说明",
       "url": "https://help.1234567.com.cn/question_646.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:19+08:00",
       "sha256": "93c0be3617d19e212fa84786e2f236713778ed8f0a77f2506598703f74954590",
       "valid": true
     },
     "payment": {
       "title": "天天基金公开业务支付说明",
       "url": "https://help.1234567.com.cn/question_890.html",
-      "checkedAt": "2026-10-31T13:02:35+08:00",
+      "checkedAt": "2026-10-31T18:55:19+08:00",
       "sha256": "b831778c1518c7d7ddf421a77f76df213890e7e0aad3aea18068e1a1ae65c7b5",
       "valid": true
     },
     "alipay_payment": {
       "title": "支付宝官方余额宝消费说明",
       "url": "https://cschannel.alipay.com/mobile/helpDetail.htm?help_id=257055",
-      "checkedAt": "2026-10-31T13:02:36+08:00",
+      "checkedAt": "2026-10-31T18:55:20+08:00",
       "sha256": "edd84ece213cb602cb58cb2a3dc6774e6685a19033b100c7738a7b3ec32d800a",
       "valid": true
     }
@@ -375,7 +375,7 @@
         "limits",
         "quick"
       ],
-      "checkedAt": "2026-10-31T13:02:35+08:00"
+      "checkedAt": "2026-10-31T18:55:17+08:00"
     },
     "ordinary": {
       "verified": true,
@@ -384,7 +384,7 @@
         "limits",
         "ordinary"
       ],
-      "checkedAt": "2026-10-31T13:02:35+08:00"
+      "checkedAt": "2026-10-31T18:55:17+08:00"
     },
     "wallet": {
       "verified": true,
@@ -392,14 +392,14 @@
         "wallet",
         "wallet_alt"
       ],
-      "checkedAt": "2026-10-31T13:02:35+08:00"
+      "checkedAt": "2026-10-31T18:55:19+08:00"
     },
     "pay": {
       "verified": true,
       "sourceIds": [
         "payment"
       ],
-      "checkedAt": "2026-10-31T13:02:35+08:00"
+      "checkedAt": "2026-10-31T18:55:19+08:00"
     }
   },
   "version": 1,
@@ -410,5 +410,5 @@
   ],
   "walletTimingConflict": true,
   "merchantPaymentVerified": false,
-  "updatedAt": "2026-10-31T13:02:36+08:00"
+  "updatedAt": "2026-10-31T18:55:20+08:00"
 }
