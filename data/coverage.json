@@ -7,7 +7,7 @@
   "missingYieldCount": 433,
   "floatingCount": 8,
   "quoteDate": "2026-10-30",
-  "fetchedAt": "2026-10-31T09:25:43+08:00",
+  "fetchedAt": "2026-10-31T13:02:32+08:00",
   "newCodes": [],
   "notSeenCount": 0,
   "scope": "公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录",
@@ -19,7 +19,7 @@
     },
     {
       "url": "https://fund.eastmoney.com/HBJJ_pjsyl.html",
-      "sha256": "c48e586d739e5fe3776cf8f7aedc7268f6a7c8db1127f21059a7b57d8ca593bf"
+      "sha256": "064d71e50031a35e08eb331df9225257f83627c11bc111c9f6f6f02931c36e69"
     }
   ],
   "latestHeaderDate": "2026-10-30",
