@@ -1,7 +1,12 @@
 {
-  "attemptedAt": "2026-11-05T19:21:08+08:00",
+  "attemptedAt": "2026-11-06T09:36:23+08:00",
   "market": "success",
-  "failures": [],
+  "failures": [
+    "取用规则 members：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://huoqibao.1234567.com.cn/json/hqb_newdatas.js?t=20200619']' returned non-zero exit status 28.",
+    "取用规则 wallet_alt：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://help.1234567.com.cn/question_646.html']' returned non-zero exit status 28.",
+    "取用规则 payment：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://help.1234567.com.cn/question_890.html']' returned non-zero exit status 28.",
+    "渠道 004502：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004502.html']' returned non-zero exit status 28."
+  ],
   "qualityExclusions": [
     "逐日 000505：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 000559：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
@@ -16,6 +21,7 @@
     "逐日 001871：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 001992：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 003402：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
+    "逐日 003468：本轮已排除 17 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 003871：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004121：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004167：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
@@ -37,6 +43,7 @@
     "逐日 150005：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 180008：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 253050：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
+    "逐日 350004：本轮已排除 17 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 360003：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 392001：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 392002：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
@@ -44,7 +51,28 @@
     "逐日 519999：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 660007：本轮已排除 3 条合并区间或不同口径记录；相关缺日拒算"
   ],
-  "retained": [],
+  "retained": [
+    {
+      "area": "公开取用规则",
+      "code": "members",
+      "fetchedAt": "2026-11-05T19:21:12+08:00"
+    },
+    {
+      "area": "公开取用规则",
+      "code": "wallet_alt",
+      "fetchedAt": "2026-11-05T19:21:13+08:00"
+    },
+    {
+      "area": "公开取用规则",
+      "code": "payment",
+      "fetchedAt": "2026-11-05T19:21:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004502",
+      "fetchedAt": "2026-11-05T19:21:30+08:00"
+    }
+  ],
   "missingRecords": [
     {
       "area": "历史近7日",
@@ -157,6 +185,15 @@
     {
       "area": "历史近7日",
       "code": "003402",
+      "dates": [
+        "2026-10-31",
+        "2026-11-01"
+      ],
+      "impact": "相关区间回放拒算；不影响同日已核验行情"
+    },
+    {
+      "area": "历史近7日",
+      "code": "003468",
       "dates": [
         "2026-10-31",
         "2026-11-01"
@@ -354,6 +391,15 @@
     },
     {
       "area": "历史近7日",
+      "code": "350004",
+      "dates": [
+        "2026-10-31",
+        "2026-11-01"
+      ],
+      "impact": "相关区间回放拒算；不影响同日已核验行情"
+    },
+    {
+      "area": "历史近7日",
       "code": "360003",
       "dates": [
         "2026-10-31",
@@ -407,8 +453,8 @@
       "impact": "相关区间回放拒算；不影响同日已核验行情"
     }
   ],
-  "finishedAt": "2026-11-05T19:22:23+08:00",
-  "channelCount": 89,
-  "historyCount": 109,
-  "state": "success"
+  "finishedAt": "2026-11-06T09:38:14+08:00",
+  "channelCount": 91,
+  "historyCount": 111,
+  "state": "partial"
 }
