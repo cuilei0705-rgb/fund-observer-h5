@@ -6,8 +6,8 @@
   "incomeCount": 545,
   "missingYieldCount": 432,
   "floatingCount": 8,
-  "quoteDate": "2026-11-13",
-  "fetchedAt": "2026-11-16T19:40:37+08:00",
+  "quoteDate": "2026-11-16",
+  "fetchedAt": "2026-11-17T09:39:57+08:00",
   "newCodes": [],
   "notSeenCount": 0,
   "scope": "公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录",
@@ -15,19 +15,19 @@
   "sources": [
     {
       "url": "https://fund.eastmoney.com/js/fundcode_search.js",
-      "sha256": "b8ed6683dc42adbacf5bf176987770d7a5517606ccc76311743e5bbca59ff9e2"
+      "sha256": "cc00adbe29d82ecd9a83368b802702e4e00f27311b7fd8acea773797abfc3375"
     },
     {
       "url": "https://fund.eastmoney.com/HBJJ_pjsyl.html",
-      "sha256": "cfe001d71f9112422cc7e1a48a3ca6b9209be6e4da191494dfa36cc17d4a3873"
+      "sha256": "4abfda35e6bac6276c829442e19bc12ad4b75534138bd16d2a1d333d83861424"
     }
   ],
   "latestHeaderDate": "2026-11-16",
-  "dateSelectionReason": "最新日期仅部分披露，采用表内覆盖充分的最近日期列",
+  "dateSelectionReason": "使用覆盖充分的最新披露日期列",
   "minimumBatchCount": 436,
   "columnCoverage": {
-    "2026-11-16": 167,
+    "2026-11-16": 545,
     "2026-11-13": 545
   },
-  "latestHeaderCompleteCount": 167
+  "latestHeaderCompleteCount": 545
 }
