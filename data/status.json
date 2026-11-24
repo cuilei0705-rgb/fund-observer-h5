@@ -1,28 +1,75 @@
 {
-  "attemptedAt": "2026-11-24T09:42:05+08:00",
+  "attemptedAt": "2026-11-24T13:27:49+08:00",
   "market": "success",
   "failures": [
-    "渠道 001026：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001026.html']' returned non-zero exit status 28.",
-    "渠道 001821：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001821.html']' returned non-zero exit status 28.",
+    "取用规则 wallet_alt：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://help.1234567.com.cn/question_646.html']' returned non-zero exit status 28.",
+    "取用规则 payment：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://help.1234567.com.cn/question_890.html']' returned non-zero exit status 28.",
+    "渠道 000301：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000301.html']' returned non-zero exit status 28.",
+    "渠道 000540：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000540.html']' returned non-zero exit status 28.",
+    "渠道 000615：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000615.html']' returned non-zero exit status 28.",
+    "渠道 000678：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000678.html']' returned non-zero exit status 28.",
+    "渠道 000701：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000701.html']' returned non-zero exit status 28.",
+    "渠道 000846：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000846.html']' returned non-zero exit status 28.",
+    "渠道 000868：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000868.html']' returned non-zero exit status 28.",
+    "渠道 000907：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000907.html']' returned non-zero exit status 28.",
+    "渠道 000908：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_000908.html']' returned non-zero exit status 28.",
+    "渠道 001526：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001526.html']' returned non-zero exit status 28.",
+    "渠道 001666：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001666.html']' returned non-zero exit status 28.",
+    "渠道 001909：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001909.html']' returned non-zero exit status 28.",
+    "渠道 001992：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_001992.html']' returned non-zero exit status 28.",
+    "渠道 002183：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_002183.html']' returned non-zero exit status 28.",
+    "渠道 002733：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_002733.html']' returned non-zero exit status 28.",
+    "渠道 002937：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_002937.html']' returned non-zero exit status 28.",
+    "渠道 003022：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003022.html']' returned non-zero exit status 28.",
     "渠道 003171：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003171.html']' returned non-zero exit status 28.",
+    "渠道 003391：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003391.html']' returned non-zero exit status 28.",
     "渠道 003460：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003460.html']' returned non-zero exit status 28.",
-    "渠道 003480：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003480.html']' returned non-zero exit status 28.",
+    "渠道 003474：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003474.html']' returned non-zero exit status 28.",
     "渠道 003483：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003483.html']' returned non-zero exit status 28.",
     "渠道 003871：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_003871.html']' returned non-zero exit status 28.",
+    "渠道 004072：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004072.html']' returned non-zero exit status 28.",
+    "渠道 004077：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004077.html']' returned non-zero exit status 28.",
+    "渠道 004078：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004078.html']' returned non-zero exit status 28.",
+    "渠道 004120：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004120.html']' returned non-zero exit status 28.",
+    "渠道 004121：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004121.html']' returned non-zero exit status 28.",
     "渠道 004167：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004167.html']' returned non-zero exit status 28.",
     "渠道 004173：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004173.html']' returned non-zero exit status 28.",
+    "渠道 004178：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004178.html']' returned non-zero exit status 28.",
+    "渠道 004179：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004179.html']' returned non-zero exit status 28.",
+    "渠道 004210：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004210.html']' returned non-zero exit status 28.",
+    "渠道 004251：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004251.html']' returned non-zero exit status 28.",
+    "渠道 004262：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004262.html']' returned non-zero exit status 28.",
+    "渠道 004286：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004286.html']' returned non-zero exit status 28.",
+    "渠道 004331：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004331.html']' returned non-zero exit status 28.",
+    "渠道 004368：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004368.html']' returned non-zero exit status 28.",
+    "渠道 004369：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004369.html']' returned non-zero exit status 28.",
+    "渠道 004373：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004373.html']' returned non-zero exit status 28.",
     "渠道 004398：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004398.html']' returned non-zero exit status 28.",
+    "渠道 004502：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004502.html']' returned non-zero exit status 28.",
+    "渠道 004545：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004545.html']' returned non-zero exit status 28.",
+    "渠道 004568：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004568.html']' returned non-zero exit status 28.",
+    "渠道 004771：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004771.html']' returned non-zero exit status 28.",
     "渠道 004811：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004811.html']' returned non-zero exit status 28.",
+    "渠道 004863：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004863.html']' returned non-zero exit status 28.",
     "渠道 004866：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004866.html']' returned non-zero exit status 28.",
     "渠道 004869：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004869.html']' returned non-zero exit status 28.",
+    "渠道 004903：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004903.html']' returned non-zero exit status 28.",
+    "渠道 004967：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004967.html']' returned non-zero exit status 28.",
     "渠道 004968：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004968.html']' returned non-zero exit status 28.",
-    "渠道 010051：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_010051.html']' returned non-zero exit status 28.",
+    "渠道 004985：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_004985.html']' returned non-zero exit status 28.",
+    "渠道 005058：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_005058.html']' returned non-zero exit status 28.",
+    "渠道 005162：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_005162.html']' returned non-zero exit status 28.",
+    "渠道 007866：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_007866.html']' returned non-zero exit status 28.",
+    "渠道 010288：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_010288.html']' returned non-zero exit status 28.",
+    "渠道 010883：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_010883.html']' returned non-zero exit status 28.",
     "渠道 011258：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_011258.html']' returned non-zero exit status 28.",
+    "渠道 015419：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_015419.html']' returned non-zero exit status 28.",
+    "渠道 018331：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_018331.html']' returned non-zero exit status 28.",
+    "渠道 018655：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_018655.html']' returned non-zero exit status 28.",
+    "渠道 018659：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_018659.html']' returned non-zero exit status 28.",
+    "渠道 020097：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_020097.html']' returned non-zero exit status 28.",
     "渠道 022249：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_022249.html']' returned non-zero exit status 28.",
-    "渠道 288201：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_288201.html']' returned non-zero exit status 28.",
-    "渠道 392002：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_392002.html']' returned non-zero exit status 28.",
-    "渠道 519512：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_519512.html']' returned non-zero exit status 28.",
-    "渠道 675071：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_675071.html']' returned non-zero exit status 28."
+    "渠道 026150：Command '['curl', '--fail', '--silent', '--show-error', '--location', '--retry', '1', '--retry-max-time', '35', '--connect-timeout', '8', '--max-time', '15', '--user-agent', 'Mozilla/5.0', '--referer', 'https://fundf10.eastmoney.com/', 'https://fundf10.eastmoney.com/jjfl_026150.html']' returned non-zero exit status 28."
   ],
   "qualityExclusions": [
     "逐日 000505：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
@@ -46,7 +93,7 @@
     "逐日 003871：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004121：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004167：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
-    "逐日 004178：本轮已排除 18 条合并区间或不同口径记录；相关缺日拒算",
+    "逐日 004178：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004179：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004210：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
     "逐日 004286：本轮已排除 4 条合并区间或不同口径记录；相关缺日拒算",
@@ -81,14 +128,99 @@
   ],
   "retained": [
     {
-      "area": "渠道",
-      "code": "001026",
-      "fetchedAt": "2026-11-23T19:22:28+08:00"
+      "area": "公开取用规则",
+      "code": "wallet_alt",
+      "fetchedAt": "2026-11-24T09:42:09+08:00"
+    },
+    {
+      "area": "公开取用规则",
+      "code": "payment",
+      "fetchedAt": "2026-11-24T09:42:09+08:00"
     },
     {
       "area": "渠道",
-      "code": "001821",
-      "fetchedAt": "2026-11-23T19:22:29+08:00"
+      "code": "000301",
+      "fetchedAt": "2026-11-24T09:42:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000540",
+      "fetchedAt": "2026-11-24T09:42:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000615",
+      "fetchedAt": "2026-11-24T09:42:14+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000678",
+      "fetchedAt": "2026-11-24T09:42:14+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000701",
+      "fetchedAt": "2026-11-24T09:42:16+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000846",
+      "fetchedAt": "2026-11-24T09:42:17+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000868",
+      "fetchedAt": "2026-11-24T09:42:17+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000907",
+      "fetchedAt": "2026-11-24T09:42:18+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "000908",
+      "fetchedAt": "2026-11-24T09:42:27+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "001526",
+      "fetchedAt": "2026-11-24T09:42:35+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "001666",
+      "fetchedAt": "2026-11-24T09:42:35+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "001909",
+      "fetchedAt": "2026-11-24T09:42:37+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "001992",
+      "fetchedAt": "2026-11-24T09:42:37+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "002183",
+      "fetchedAt": "2026-11-24T09:42:37+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "002733",
+      "fetchedAt": "2026-11-24T09:42:38+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "002937",
+      "fetchedAt": "2026-11-24T09:42:38+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "003022",
+      "fetchedAt": "2026-11-24T09:42:38+08:00"
     },
     {
       "area": "渠道",
@@ -97,13 +229,18 @@
     },
     {
       "area": "渠道",
+      "code": "003391",
+      "fetchedAt": "2026-11-24T09:42:53+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "003460",
       "fetchedAt": "2026-11-23T19:22:33+08:00"
     },
     {
       "area": "渠道",
-      "code": "003480",
-      "fetchedAt": "2026-11-23T19:22:33+08:00"
+      "code": "003474",
+      "fetchedAt": "2026-11-24T09:42:56+08:00"
     },
     {
       "area": "渠道",
@@ -117,6 +254,31 @@
     },
     {
       "area": "渠道",
+      "code": "004072",
+      "fetchedAt": "2026-11-24T09:43:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004077",
+      "fetchedAt": "2026-11-24T09:43:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004078",
+      "fetchedAt": "2026-11-24T09:43:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004120",
+      "fetchedAt": "2026-11-24T09:43:13+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004121",
+      "fetchedAt": "2026-11-24T09:43:13+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "004167",
       "fetchedAt": "2026-11-23T19:22:35+08:00"
     },
@@ -127,13 +289,88 @@
     },
     {
       "area": "渠道",
+      "code": "004178",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004179",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004210",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004251",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004262",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004286",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004331",
+      "fetchedAt": "2026-11-24T09:43:24+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004368",
+      "fetchedAt": "2026-11-24T09:43:27+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004369",
+      "fetchedAt": "2026-11-24T09:43:27+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004373",
+      "fetchedAt": "2026-11-24T09:43:27+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "004398",
       "fetchedAt": "2026-11-23T19:22:38+08:00"
     },
     {
       "area": "渠道",
+      "code": "004502",
+      "fetchedAt": "2026-11-24T09:43:39+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004545",
+      "fetchedAt": "2026-11-24T09:43:39+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004568",
+      "fetchedAt": "2026-11-24T09:43:39+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004771",
+      "fetchedAt": "2026-11-24T09:43:39+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "004811",
       "fetchedAt": "2026-11-23T19:22:39+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004863",
+      "fetchedAt": "2026-11-24T09:43:43+08:00"
     },
     {
       "area": "渠道",
@@ -147,13 +384,48 @@
     },
     {
       "area": "渠道",
+      "code": "004903",
+      "fetchedAt": "2026-11-24T09:43:45+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "004967",
+      "fetchedAt": "2026-11-24T09:43:45+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "004968",
       "fetchedAt": "2026-11-23T19:22:40+08:00"
     },
     {
       "area": "渠道",
-      "code": "010051",
-      "fetchedAt": "2026-11-23T19:22:42+08:00"
+      "code": "004985",
+      "fetchedAt": "2026-11-24T09:43:59+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "005058",
+      "fetchedAt": "2026-11-24T09:43:59+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "005162",
+      "fetchedAt": "2026-11-24T09:43:59+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "007866",
+      "fetchedAt": "2026-11-24T09:43:59+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "010288",
+      "fetchedAt": "2026-11-24T09:44:02+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "010883",
+      "fetchedAt": "2026-11-24T09:44:02+08:00"
     },
     {
       "area": "渠道",
@@ -162,28 +434,38 @@
     },
     {
       "area": "渠道",
+      "code": "015419",
+      "fetchedAt": "2026-11-24T09:44:04+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "018331",
+      "fetchedAt": "2026-11-24T09:44:04+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "018655",
+      "fetchedAt": "2026-11-24T09:44:04+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "018659",
+      "fetchedAt": "2026-11-24T09:44:04+08:00"
+    },
+    {
+      "area": "渠道",
+      "code": "020097",
+      "fetchedAt": "2026-11-24T09:44:10+08:00"
+    },
+    {
+      "area": "渠道",
       "code": "022249",
       "fetchedAt": "2026-11-23T19:22:45+08:00"
     },
     {
       "area": "渠道",
-      "code": "288201",
-      "fetchedAt": "2026-11-23T19:22:47+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "392002",
-      "fetchedAt": "2026-11-23T19:22:48+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "519512",
-      "fetchedAt": "2026-11-23T19:22:49+08:00"
-    },
-    {
-      "area": "渠道",
-      "code": "675071",
-      "fetchedAt": "2026-11-23T19:22:50+08:00"
+      "code": "026150",
+      "fetchedAt": "2026-11-24T09:44:19+08:00"
     }
   ],
   "missingRecords": [
@@ -665,7 +947,7 @@
       "impact": "相关区间回放拒算；不影响同日已核验行情"
     }
   ],
-  "finishedAt": "2026-11-24T09:45:22+08:00",
+  "finishedAt": "2026-11-24T13:34:23+08:00",
   "channelCount": 121,
   "historyCount": 141,
   "state": "partial"
