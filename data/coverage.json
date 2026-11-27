@@ -2,12 +2,12 @@
   "total": 977,
   "universeCount": 977,
   "quoteRows": 546,
-  "yieldCount": 543,
-  "incomeCount": 543,
-  "missingYieldCount": 434,
+  "yieldCount": 544,
+  "incomeCount": 544,
+  "missingYieldCount": 433,
   "floatingCount": 8,
   "quoteDate": "2026-11-26",
-  "fetchedAt": "2026-11-27T03:42:49+08:00",
+  "fetchedAt": "2026-11-27T16:49:28+08:00",
   "newCodes": [],
   "notSeenCount": 0,
   "scope": "公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录",
@@ -19,15 +19,15 @@
     },
     {
       "url": "https://fund.eastmoney.com/HBJJ_pjsyl.html",
-      "sha256": "d21b9c59775edf89dbec568eb803f5036db4cf0a656d65605f140c6718efcdd1"
+      "sha256": "869978bc9bb6f31da56a557e069c26f2ef40feb3b40397cb12970fd01b8bf1ab"
     }
   ],
-  "latestHeaderDate": "2026-11-26",
-  "dateSelectionReason": "使用覆盖充分的最新披露日期列",
+  "latestHeaderDate": "2026-11-27",
+  "dateSelectionReason": "最新日期仅部分披露，采用表内覆盖充分的最近日期列",
   "minimumBatchCount": 436,
   "columnCoverage": {
-    "2026-11-26": 543,
-    "2026-11-25": 544
+    "2026-11-27": 0,
+    "2026-11-26": 544
   },
-  "latestHeaderCompleteCount": 543
+  "latestHeaderCompleteCount": 0
 }
