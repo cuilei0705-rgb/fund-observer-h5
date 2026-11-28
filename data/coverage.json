@@ -1,25 +1,27 @@
 {
-  "total": 977,
-  "universeCount": 977,
+  "total": 978,
+  "universeCount": 978,
   "quoteRows": 546,
   "yieldCount": 544,
   "incomeCount": 544,
-  "missingYieldCount": 433,
+  "missingYieldCount": 434,
   "floatingCount": 8,
   "quoteDate": "2026-11-27",
-  "fetchedAt": "2026-11-28T03:31:35+08:00",
-  "newCodes": [],
+  "fetchedAt": "2026-11-28T16:06:53+08:00",
+  "newCodes": [
+    "030782"
+  ],
   "notSeenCount": 0,
   "scope": "公开代码总表中货币类别与收益表并集，按份额代码去重；不是监管全量在售名录",
   "completeness": "未与监管名录逐项核对，基金公司及销售渠道覆盖不完整。各份额不等于独立基金；缺失及存续未知均保留。",
   "sources": [
     {
       "url": "https://fund.eastmoney.com/js/fundcode_search.js",
-      "sha256": "e501ddacf1f255ad69edd6fab348703ef0cb8597b5ef35565b3c57ce71aebec4"
+      "sha256": "3d87da4f403c9e629bd7b16e5b72b2c10fc65639a2de2f61c73c5388b4db61d6"
     },
     {
       "url": "https://fund.eastmoney.com/HBJJ_pjsyl.html",
-      "sha256": "bed86d6d641735c6b8ede8d039daf6582b9336c9d04e5370c82edc8d109c27cf"
+      "sha256": "56ef9e2d61512f14396f437f9c27f918c03f4f9078e92c0af2b2a9b9a5371d7d"
     }
   ],
   "latestHeaderDate": "2026-11-27",
